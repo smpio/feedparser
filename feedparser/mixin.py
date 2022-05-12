@@ -509,12 +509,6 @@ class _FeedParserMixin(
             except (binascii.Error, binascii.Incomplete, UnicodeDecodeError):
                 pass
 
-        # resolve relative URIs
-        if (element in self.can_be_relative_uri) and output:
-            # do not resolve guid elements with isPermalink="false"
-            if not element == 'id' or self.guidislink:
-                output = self.resolve_uri(output)
-
         # decode entities within embedded markup
         if not self.contentparams.get('base64', 0):
             output = self.decode_entities(element, output)
